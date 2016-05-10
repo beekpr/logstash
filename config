@@ -1,0 +1,22 @@
+input {
+    gelf {
+        type => docker
+        port => 12201
+    }
+}
+
+output {
+    stdout {
+        codec => rubydebug
+    }
+    amazon_es {
+        hosts                 => ["%(LS_ELASTICSEARCH_ENDPOINT)s"]
+        port                  => "443"
+        protocol              => "https"
+        region                => "%(LS_AWS_REGION)s"
+        aws_access_key_id     => "%(LS_AWS_ACCESS_KEY)s"
+        aws_secret_access_key => "%(LS_AWS_SECRET_ACCESS_KEY)s"
+    }
+}
+
+# vim: set sw=4 tw=4 ts=4 et
