@@ -6,9 +6,6 @@ input {
 }
 
 output {
-    stdout {
-        codec => rubydebug
-    }
     amazon_es {
         hosts                 => ["%(LS_ELASTICSEARCH_ENDPOINT)s"]
         port                  => "443"

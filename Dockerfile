@@ -9,7 +9,9 @@ ADD render_config.py /usr/local/bin/render_config
 ADD docker-render-entrypoint.sh /docker-render-entrypoint.sh
 
 ENV \
-  LS_HEAP_SIZE="512m"
+  LS_HEAP_SIZE="128m"
+
+EXPOSE 12201/udp
 
 ENTRYPOINT ["/docker-render-entrypoint.sh"]
 CMD logstash -f /etc/logstash/config
