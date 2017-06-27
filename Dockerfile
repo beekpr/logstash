@@ -12,6 +12,7 @@ ENV \
   LS_HEAP_SIZE="128m"
 
 EXPOSE 12201/udp
+EXPOSE 5140/udp
 
 ENTRYPOINT ["/docker-render-entrypoint.sh"]
 CMD logstash -f /etc/logstash/config
