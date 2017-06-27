@@ -6,6 +6,7 @@ input {
     syslog {
         type => syslog
         port => 5140
+        codec => "json"
     }
 }
 
