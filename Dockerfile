@@ -1,18 +1,12 @@
-FROM logstash:2.3.2-1
+FROM docker.elastic.co/logstash/logstash:5.6.0
 
-RUN apt-get update && apt-get install -y --no-install-recommends python2.7 \
-    && rm -rf /var/lib/apt/lists/*
-RUN plugin install logstash-output-amazon_es
-
-ADD config /etc/logstash/config.template
-ADD render_config.py /usr/local/bin/render_config
-ADD docker-render-entrypoint.sh /docker-render-entrypoint.sh
+RUN logstash-plugin install logstash-output-amazon_es
 
 ENV \
-  LS_HEAP_SIZE="128m"
-
+  LS_HEAP_SIZE="128m" \
+  XPACK_MONITORING_ENABLED=false
 EXPOSE 12201/udp
 EXPOSE 5140/udp
 
-ENTRYPOINT ["/docker-render-entrypoint.sh"]
-CMD logstash -f /etc/logstash/config
+RUN rm -f /usr/share/logstash/pipeline/logstash.conf
+ADD pipeline/ /usr/share/logstash/pipeline
