@@ -8,5 +8,3 @@ ENV \
 EXPOSE 12201/udp
 EXPOSE 5140/udp
 
-RUN rm -f /usr/share/logstash/pipeline/logstash.conf
-ADD pipeline/ /usr/share/logstash/pipeline
